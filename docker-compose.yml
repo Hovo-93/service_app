@@ -1,0 +1,10 @@
+services:
+  web-app:
+    build:
+      context: .  #path the location where has dockerfile
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./service:/service #chotbi ne rebuldit ete unenqw python code poxac rebuild chenqn dockeri mej local papken miacrinq dockerin
+    command: >
+      sh -c "python manage.py runserver 0.0.0.0:8000"
