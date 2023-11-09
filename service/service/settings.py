@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'cachalot',
     'clients',
     'services',
 ]
@@ -85,10 +86,10 @@ WSGI_APPLICATION = 'service.wsgi.application'
 DATABASES= {
     'default':{
         'ENGINE':'django.db.backends.postgresql',
-        'HOST':os.environ.get('DB_HOST'),
-        'NAME':os.environ.get('DB_NAME'),
-        'USER':os.environ.get('DB_USER'),
-        'PASSWORD':os.environ.get('DB_PASS'),
+        'HOST':'database',
+        'NAME':'dbname',
+        'USER':'dbuser',
+        'PASSWORD':'pass',
 
     }
 }
@@ -130,7 +131,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
 STATIC_URL = '/static/'
-
+LOGIN_URL = 'login'
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
@@ -152,3 +153,13 @@ LOGGING = {
 }
 #protokol redis:// hostname redis kak(https or https)
 CELERY_BROKER_URL='redis://redis:6379/0'
+
+CACHES = {
+    "default": {
+        "BACKEND": "django_redis.cache.RedisCache",
+        "LOCATION": "redis://redis:6379/1",
+    }
+}
+
+
+PRICE_CACHE_NAME = 'price_cache'
